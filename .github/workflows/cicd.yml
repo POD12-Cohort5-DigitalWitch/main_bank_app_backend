@@ -10,7 +10,7 @@ on:
 
 jobs:
   Continues-Integration_build_and_push:
-    runs-on: bank-backendapi
+    runs-on: ubuntu-latest
     env:
       ECR_REGISTRY: 755545428276.dkr.ecr.us-east-1.amazonaws.com
       ECR_REPOSITORY: bank-backendapi
@@ -65,6 +65,11 @@ jobs:
       env:
           GIT_USERNAME: ${{ secrets.GIT_USERNAME }}
           GIT_PASSWORD: ${{ secrets.GIT_PASSWORD }}
+
+    
+          SPRING_DATASOURCE_URL: ${{ secrets.DB_URL }}
+          SPRING_DATASOURCE_USERNAME: ${{ secrets.DB_USERNAME }}
+          SPRING_DATASOURCE_PASSWORD: ${{ secrets.DB_PASSWORD }}
       run: |
          git clone https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/pod9project/kubernetes-manifest.git
          
