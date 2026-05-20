@@ -35,14 +35,14 @@ jobs:
       id: login-ecr
       uses: aws-actions/amazon-ecr-login@v2
 
-    - name: Build Docker image
-      run: docker build -t 755545428276.dkr.ecr.us-east-1.amazonaws.com/bank-backendapi:4 .
-
     # - name: Build Docker image
-    #   working-directory: ./main_bank_app_backend
-    #   run: |
-    #     docker build -t ${{ env.ECR_REGISTRY }}/${{ env.ECR_REPOSITORY }}:${{ env.IMAGE_TAG }} .
-    #     docker tag ${{ env.ECR_REGISTRY }}/${{ env.ECR_REPOSITORY }}:${{ env.IMAGE_TAG }} ${{ env.ECR_REGISTRY }}/${{ env.ECR_REPOSITORY }}:latest
+    #   run: docker build -t 755545428276.dkr.ecr.us-east-1.amazonaws.com/bank-backendapi:4 .
+
+    - name: Build Docker image
+      working-directory: ./main_bank_app_backend
+      run: |
+        docker build -t ${{ env.ECR_REGISTRY }}/${{ env.ECR_REPOSITORY }}:${{ env.IMAGE_TAG }} .
+        docker tag ${{ env.ECR_REGISTRY }}/${{ env.ECR_REPOSITORY }}:${{ env.IMAGE_TAG }} ${{ env.ECR_REGISTRY }}/${{ env.ECR_REPOSITORY }}:latest
   
     - name: Push Docker images to ECR
       run: |
@@ -74,7 +74,7 @@ jobs:
           SPRING_DATASOURCE_USERNAME: ${{ secrets.DB_USERNAME }}
           SPRING_DATASOURCE_PASSWORD: ${{ secrets.DB_PASSWORD }}
       run: |
-         git clone https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/pod9project/kubernetes-manifest.git
+         git clone https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/POD12-Cohort5-DigitalWitch/kubernetes-manifest.git
          
          cd kubernetes-manifest
          git config --global user.email "cohort5.pod12@gmail.com"
