@@ -5,4 +5,4 @@ metadata:
 data:
   DB_HOST: "102.90.139.7"
   DB_PORT: "3306"
-  DB_NAME: "online_banking_system"
+  DB_NAME: "production-mysql-db"
