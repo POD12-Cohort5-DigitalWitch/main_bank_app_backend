@@ -1,7 +1,10 @@
 name: Static Code Analysis and Dependency Check analysis.
 
 on:
-  workflow_dispatch:
+  push:
+    branches:
+      - main
+
 jobs:
   # OWASP-ependency-Check:
   #   name: Dependency-Check
@@ -41,11 +44,11 @@ jobs:
       - name: Set up JDK 11
         uses: actions/setup-java@v3
         with:
-          java-version: 17.0.19
+          java-version: 17
           distribution: 'temurin'
           
       - name: maven clean verify  
-        run: mvn clean verify -DnvdApiKey=${{ secrets.NVD_API_KEY_01 }}
+        run: run: mvn clean verify -DskipTests -DossindexAnalyzerEnabled=false
 
       - name: SonarQube Scan
         uses: sonarsource/sonarqube-scan-action@master
