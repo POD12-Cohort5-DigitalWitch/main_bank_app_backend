@@ -6,6 +6,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
+        <!-- Upgrade from 3.1.2 to a modern patch version to automatically clear the CVE list -->
         <version>3.4.3</version>
         <relativePath /> <!-- lookup parent from repository -->
     </parent>
@@ -74,11 +75,6 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>io.h2database</groupId>
-            <artifactId>h2</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
             <groupId>io.jsonwebtoken</groupId>
             <artifactId>jjwt-api</artifactId>
             <version>0.11.5</version>
@@ -137,7 +133,8 @@
                     <format>ALL</format> <!-- includes JSON, HTML, XML -->
                     <failBuildOnCVSS>11</failBuildOnCVSS> <!-- avoids failing pipeline -->
                     <showSummary>true</showSummary> <!-- more console output -->
-                    <failOnError>false</failOnError> <!-- prevents pipeline crashes during API rate-limiting -->
+                    <!-- This prevents the build from crashing when Sonatype or NVD servers throw a 401/503 error -->
+                    <failOnError>false</failOnError>
                 </configuration>
             </plugin>
             <plugin>
