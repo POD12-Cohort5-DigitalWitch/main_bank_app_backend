@@ -1,10 +1,7 @@
 name: Static Code Analysis and Dependency Check analysis.
 
 on:
-  push:
-    branches:
-      - main
-
+  workflow_dispatch:
 jobs:
   # OWASP-ependency-Check:
   #   name: Dependency-Check
