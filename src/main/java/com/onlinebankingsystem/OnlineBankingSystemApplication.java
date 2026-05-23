@@ -15,54 +15,54 @@ import com.onlinebankingsystem.resource.BankAccountResource;
 @SpringBootApplication
 @EnableWebMvc
 public class OnlineBankingSystemApplication implements WebMvcConfigurer {
-	
-	private final Logger LOG = LoggerFactory.getLogger(BankAccountResource.class);
 
-	private static int ACCESS_CONTROL_MAX_AGE_IN_SECONDS = 12 * 60 * 60;
+    private final Logger LOG = LoggerFactory.getLogger(BankAccountResource.class);
 
-	private static final HashSet<String> TRUSTED_SOURCES = new HashSet<String>();
+    private static int ACCESS_CONTROL_MAX_AGE_IN_SECONDS = 12 * 60 * 60;
 
-	static {
-		TRUSTED_SOURCES.add("https://bank.cohort5pod12.site");
-	}
+    private static final HashSet<String> TRUSTED_SOURCES = new HashSet<String>();
 
-	// method to add trusted sources via application context
-	public static void setTrustedSources(final HashSet<String> sources) {
-		TRUSTED_SOURCES.addAll(sources);
-	}
+    static {
+        TRUSTED_SOURCES.add("https://bank.cohort5pod12.site");
+    }
 
-	public static void main(String[] args) {
-		SpringApplication.run(OnlineBankingSystemApplication.class, args);
-	}
+    // method to add trusted sources via application context
+    public static void setTrustedSources(final HashSet<String> sources) {
+        TRUSTED_SOURCES.addAll(sources);
+    }
 
-//	@Bean
-//	public WebMvcConfigurer corsConfigurer() {
-//		return new WebMvcConfigurer() {
-//			@Override
-//			public void addCorsMappings(CorsRegistry registry) {
-//				registry.addMapping("/**")
+    public static void main(String[] args) {
+        SpringApplication.run(OnlineBankingSystemApplication.class, args);
+    }
+
+//  @Bean
+//  public WebMvcConfigurer corsConfigurer() {
+//      return new WebMvcConfigurer() {
+//          @Override
+//          public void addCorsMappings(CorsRegistry registry) {
+//              registry.addMapping("/**")
 //                .allowedOrigins("*") // Replace with your allowed origins
 //                .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
 //                .allowedHeaders("Authorization", "Content-Type") // Specify the headers you want to allow
 //                .allowCredentials(true);
-//			}
-//		};
-//	}
+//          }
+//      };
+//  }
 
-	@Override
-	public void addCorsMappings(CorsRegistry registry) {
+    @Override
+    public void addCorsMappings(CorsRegistry registry) {
 
-		LOG.info(TRUSTED_SOURCES.toString());
-		
-		registry.addMapping("/**")
-				// .allowedOrigins(TRUSTED_SOURCES.toArray(new String[TRUSTED_SOURCES.size()]))
-				.allowedOrigins("https://bank."DELETE", "OPTIONS", "HEAD")
-				.allowedHeaders("origin", "content-type", "accept", "authorization", "user-agent", "host",
-						"X-Forwarded-For", "X-Forwarded-Proto", "X-Forwarded-Port", "X-Redirected-Path",
-						"X-Redirected-Params", "X-TraceId", "X-Feature-Flags", "X-Partner-Id")
-				.exposedHeaders("Content-Length", "Content-Type", "Content-Disposition", "Cache-Control")
-				.allowCredentials(true).maxAge(ACCESS_CONTROL_MAX_AGE_IN_SECONDS);
+        LOG.info(TRUSTED_SOURCES.toString());
 
-	}
+        registry.addMapping("/**")
+                // .allowedOrigins(TRUSTED_SOURCES.toArray(new String[TRUSTED_SOURCES.size()]))
+                .allowedOrigins("https://bank.cohort5pod12.site").allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS", "HEAD")
+                .allowedHeaders("origin", "content-type", "accept", "authorization", "user-agent", "host",
+                        "X-Forwarded-For", "X-Forwarded-Proto", "X-Forwarded-Port", "X-Redirected-Path",
+                        "X-Redirected-Params", "X-TraceId", "X-Feature-Flags", "X-Partner-Id")
+                .exposedHeaders("Content-Length", "Content-Type", "Content-Disposition", "Cache-Control")
+                .allowCredentials(true).maxAge(ACCESS_CONTROL_MAX_AGE_IN_SECONDS);
+
+    }
 
 }
