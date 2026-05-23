@@ -160,11 +160,11 @@ public class SecurityConfig {
 
                                 .requestMatchers(
                                         "/api/user/login",
-                                        "/api/user/admin/register"
+                                        "/api/user/admin/register",
+                                        "/api/user/register"
                                 ).permitAll()
 
                                 .requestMatchers(
-                                        "/api/bank/register",
                                         "/api/bank/fetch/all",
                                         "/api/bank/fetch/user",
                                         "/api/bank/account/fetch/all",
