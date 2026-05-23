@@ -107,6 +107,8 @@
 
 
 
+package com.onlinebankingsystem.config;
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -156,13 +158,11 @@ public class SecurityConfig {
                         auth -> auth
                                 .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
 
-                                // Public APIs
                                 .requestMatchers(
                                         "/api/user/login",
                                         "/api/user/admin/register"
                                 ).permitAll()
 
-                                // These APIs are only accessible by ADMIN
                                 .requestMatchers(
                                         "/api/bank/register",
                                         "/api/bank/fetch/all",
@@ -171,7 +171,6 @@ public class SecurityConfig {
                                         "/api/bank/transaction/all"
                                 ).hasAuthority(UserRole.ROLE_ADMIN.value())
 
-                                // These APIs are only accessible by BANK
                                 .requestMatchers(
                                         "/api/bank/account/add",
                                         "/api/bank/account/fetch/bankwise",
@@ -186,13 +185,11 @@ public class SecurityConfig {
                                         "/api/user/bank/customer/search"
                                 ).hasAuthority(UserRole.ROLE_BANK.value())
 
-                                // These APIs are only accessible by CUSTOMER
                                 .requestMatchers(
                                         "/api/bank/transaction/account/transfer",
                                         "/api/bank/transaction/history/timerange"
                                 ).hasAuthority(UserRole.ROLE_CUSTOMER.value())
 
-                                // These APIs are only accessible by BANK, CUSTOMER & ADMIN
                                 .requestMatchers(
                                         "/api/bank/account/fetch/user",
                                         "/api/bank/transaction/history"
@@ -202,7 +199,6 @@ public class SecurityConfig {
                                         UserRole.ROLE_ADMIN.value()
                                 )
 
-                                // These APIs are only accessible by BANK & ADMIN
                                 .requestMatchers(
                                         "/api/user/register",
                                         "/api/bank/account/search/all"
@@ -211,7 +207,6 @@ public class SecurityConfig {
                                         UserRole.ROLE_ADMIN.value()
                                 )
 
-                                // These APIs are only accessible by BANK, ADMIN & CUSTOMER
                                 .requestMatchers(
                                         "/api/bank/fetch/id",
                                         "/api/bank/transaction/statement/download"
@@ -274,7 +269,6 @@ public class SecurityConfig {
         return config.getAuthenticationManager();
     }
 }
-
 
 
 
