@@ -56,7 +56,7 @@ public class OnlineBankingSystemApplication implements WebMvcConfigurer {
 		
 		registry.addMapping("/**")
 				// .allowedOrigins(TRUSTED_SOURCES.toArray(new String[TRUSTED_SOURCES.size()]))
-				.allowedOrigins("https://bank.cohort5pod12.site").allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS", "HEAD")
+				.allowedOrigins("https://bank."DELETE", "OPTIONS", "HEAD")
 				.allowedHeaders("origin", "content-type", "accept", "authorization", "user-agent", "host",
 						"X-Forwarded-For", "X-Forwarded-Proto", "X-Forwarded-Port", "X-Redirected-Path",
 						"X-Redirected-Params", "X-TraceId", "X-Feature-Flags", "X-Partner-Id")
