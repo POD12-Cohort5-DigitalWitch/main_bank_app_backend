@@ -231,8 +231,9 @@ public class SecurityConfig {
         CorsConfiguration configuration = new CorsConfiguration();
 
         configuration.setAllowedOrigins(List.of(
-                "https://app.cohort5pod12.site"
-        ));
+        "https://bank.cohort5pod12.site",
+        "https://app.cohort5pod12.site"
+));
 
         configuration.setAllowedMethods(List.of(
                 "GET",
